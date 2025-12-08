@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Smart Notes Maker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+      <h1>Smart Notes Maker 🧠</h1>
+      <p>Summarize PDFs, YouTube lectures, or raw notes into bullet points with quiz questions.</p>
+    </header>
+
+    <main>
+      <section class="tabs">
+        <button class="tab-button active" data-tab="tab-text">Text / Lecture Notes</button>
+        <button class="tab-button" data-tab="tab-pdf">PDF Upload</button>
+        <button class="tab-button" data-tab="tab-youtube">YouTube Transcript</button>
+      </section>
+
+      <section class="tab-content active" id="tab-text">
+        <h2>Paste Lecture / Notes</h2>
+        <textarea id="text-input" placeholder="Paste your lecture notes or any long text here..."></textarea>
+        <button id="process-text-btn" class="primary-btn">Generate Smart Notes</button>
+      </section>
+
+      <section class="tab-content" id="tab-pdf">
+        <h2>Upload PDF</h2>
+        <input type="file" id="pdf-input" accept="application/pdf" />
+        <button id="process-pdf-btn" class="primary-btn">Generate Smart Notes</button>
+        <p class="hint">Tip: Use lecture slides, research papers, or ebooks.</p>
+      </section>
+
+      <section class="tab-content" id="tab-youtube">
+        <h2>From YouTube Lecture</h2>
+        <input
+          type="text"
+          id="youtube-url-input"
+          placeholder="Paste YouTube URL (with transcript enabled)..."
+        />
+        <button id="process-youtube-btn" class="primary-btn">Generate Smart Notes</button>
+        <p class="hint">Note: The video must have an English transcript available.</p>
+      </section>
+
+      <section id="status-section">
+        <div id="loader" class="loader hidden"></div>
+        <p id="status-message"></p>
+      </section>
+
+      <section id="results-section" class="hidden">
+        <div class="results-column">
+          <h2>Summary Bullet Points</h2>
+          <ul id="summary-list"></ul>
+        </div>
+        <div class="results-column">
+          <h2>Quiz Questions</h2>
+          <div id="quiz-container"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="app-footer">
+      <span>Built by Mithun • Smart Notes Maker</span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
