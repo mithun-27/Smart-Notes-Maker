@@ -1,4 +1,4 @@
 flask
 flask-cors
 PyPDF2
-youtube-transcript-api
+youtube-transcript-api>=1.2.3

@@ -1,0 +1,76 @@
+# ============================
+# Python
+# ============================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Python package / build
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# Environment variables / secrets
+.env
+.env.*
+*.env
+
+# ============================
+# Flask
+# ============================
+instance/
+.webassets-cache
+
+# Flask uploads / temp files
+uploads/
+tmp/
+temp/
+
+# ============================
+# OS / Editor junk
+# ============================
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# VS Code
+.vscode/
+.history/
+
+# PyCharm / IntelliJ
+.idea/
+
+# ============================
+# Logs
+# ============================
+*.log
+logs/
+
+# ============================
+# Frontend (optional / safe ignores)
+# ============================
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# ============================
+# Cache / runtime files
+# ============================
+.cache/
+pytest_cache/
+
+# ============================
+# PDF / media files (optional)
+# ============================
+*.pdf
+
+# ============================
+# Jupyter / Experiments
+# ============================
+.ipynb_checkpoints/
