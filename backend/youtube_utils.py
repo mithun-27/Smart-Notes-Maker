@@ -10,6 +10,8 @@ from youtube_transcript_api import (
     VideoUnavailable,
 )
 
+from summarizer import split_into_sentences, normalize_text
+
 
 def extract_video_id(url: str) -> str | None:
     """
@@ -122,4 +124,39 @@ def fetch_youtube_transcript(url: str) -> str:
     if not transcript_text:
         raise ValueError("Transcript was fetched but contained no text.")
 
-    return transcript_text
+    return clean_transcript_text(transcript_text)
+
+
+def _too_similar(a: str, b: str, threshold: float = 0.8) -> bool:
+    set_a = set(a.lower().split())
+    set_b = set(b.lower().split())
+    if not set_a or not set_b:
+        return False
+    overlap = len(set_a & set_b) / len(set_a | set_b)
+    return overlap >= threshold
+
+
+def clean_transcript_text(raw_text: str) -> str:
+    """
+    Lightly clean a transcript to remove filler intros and repeated lines.
+    This keeps summaries from being dominated by greetings/openers.
+    """
+    filler_start = re.compile(
+        r"^(hey|hi|hello|what's up everybody|welcome back|thanks for watching|today i'm going to)",
+        re.IGNORECASE,
+    )
+
+    sentences = split_into_sentences(raw_text)
+    cleaned = []
+    for s in sentences:
+        s = normalize_text(s)
+        if not s:
+            continue
+        if filler_start.search(s):
+            # skip obvious greeting/intro
+            continue
+        if any(_too_similar(s, prev) for prev in cleaned):
+            continue
+        cleaned.append(s)
+
+    return " ".join(cleaned) if cleaned else raw_text.strip()
